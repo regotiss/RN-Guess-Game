@@ -1,41 +1,42 @@
-import React, {useState} from "react";
-import { View, StyleSheet, Text, TextInput, Button } from "react-native";
+import React, { useState } from "react";
+import { View, StyleSheet, Text, Button, Keyboard, TouchableWithoutFeedback } from "react-native";
 import Card from "../components/Card";
 import { $primary, $secondary } from "../constants/colors";
 import Input from "../components/Input";
 
 const StartGameScreen = () => {
-  const [enteredValue, setEnteredValue] = useState(''); 
-  const onInputChange = (inputText) => {
+  const [enteredValue, setEnteredValue] = useState("");
+  const onInputChange = inputText => {
     const updatedText = inputText.replace(/[^0-9]/g, "");
-    console.log(updatedText);
-    setEnteredValue(updatedText)
+    setEnteredValue(updatedText);
   };
 
   return (
-    <View style={styles.screen}>
-      <Text style={styles.title}>Start Guess Game</Text>
-      <Card style={styles.inputContainer}>
-        <Text>Enter your number</Text>
-        <Input
-          style={styles.input}
-          blurOnSubmit
-          autoCapitalize="none"
-          keyboardType="number-pad"
-          maxLength={2}
-          onChangeText={onInputChange}
-          value={enteredValue}
-        />
-        <View style={styles.buttonContainer}>
-          <View style={styles.button}>
-            <Button title="Confirm" color={$secondary} />
+    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+      <View style={styles.screen}>
+        <Text style={styles.title}>Start Guess Game</Text>
+        <Card style={styles.inputContainer}>
+          <Text>Enter your number</Text>
+          <Input
+            style={styles.input}
+            blurOnSubmit
+            autoCapitalize="none"
+            keyboardType="number-pad"
+            maxLength={2}
+            onChangeText={onInputChange}
+            value={enteredValue}
+          />
+          <View style={styles.buttonContainer}>
+            <View style={styles.button}>
+              <Button title="Confirm" color={$secondary} />
+            </View>
+            <View style={styles.button}>
+              <Button title="Reset" color={$primary} />
+            </View>
           </View>
-          <View style={styles.button}>
-            <Button title="Reset" color={$primary} />
-          </View>
-        </View>
-      </Card>
-    </View>
+        </Card>
+      </View>
+    </TouchableWithoutFeedback>
   );
 };
 
