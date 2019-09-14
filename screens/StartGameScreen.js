@@ -1,5 +1,13 @@
 import React, { useState } from "react";
-import { View, StyleSheet, Text, Button, Keyboard, TouchableWithoutFeedback } from "react-native";
+import {
+  View,
+  StyleSheet,
+  Text,
+  Button,
+  Keyboard,
+  TouchableWithoutFeedback,
+  Alert
+} from "react-native";
 import Card from "../components/Card";
 import { $primary, $secondary } from "../constants/colors";
 import Input from "../components/Input";
@@ -14,21 +22,24 @@ const StartGameScreen = () => {
   };
 
   const reset = () => {
-    setEnteredValue('');
+    setEnteredValue("");
     setConfirmed(false);
-  }
+  };
 
   const confirm = () => {
-    const enteredNumber = Number.parseInt(enteredNumber);
-    if(enteredNumber == NaN || enteredNumber <= 0 || enteredNumber > 99) {
-        return;
+    const enteredNumber = Number.parseInt(enteredValue);
+    if (Number.isNaN(enteredNumber) || enteredNumber <= 0 || enteredNumber > 99) {
+      Alert.alert("Invalid Number", "Please enter number between 1 to 99", [
+        { text: "OK", style: "destructive", onPress: (reset) }
+      ]);
+      return;
     }
     setConfirmed(true);
     setSelectedNumber(enteredValue);
   };
   let confirmedMsg;
-  if(confirmed) {
-      confirmedMsg = <Text>Choosen Number: {selectedNumber}</Text>
+  if (confirmed) {
+    confirmedMsg = <Text>Choosen Number: {selectedNumber}</Text>;
   }
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
@@ -47,10 +58,10 @@ const StartGameScreen = () => {
           />
           <View style={styles.buttonContainer}>
             <View style={styles.button}>
-              <Button title="Confirm" color={$secondary} onPress={confirm}/>
+              <Button title="Confirm" color={$secondary} onPress={confirm} />
             </View>
             <View style={styles.button}>
-              <Button title="Reset" color={$primary} onPress={reset}/>
+              <Button title="Reset" color={$primary} onPress={reset} />
             </View>
           </View>
           {confirmedMsg}
