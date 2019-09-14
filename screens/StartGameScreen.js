@@ -11,6 +11,7 @@ import {
 import Card from "../components/Card";
 import { $primary, $secondary } from "../constants/colors";
 import Input from "../components/Input";
+import NumberContainer from "../components/NumberContainer";
 
 const StartGameScreen = () => {
   const [enteredValue, setEnteredValue] = useState("");
@@ -28,18 +29,29 @@ const StartGameScreen = () => {
 
   const confirm = () => {
     const enteredNumber = Number.parseInt(enteredValue);
-    if (Number.isNaN(enteredNumber) || enteredNumber <= 0 || enteredNumber > 99) {
+    if (
+      Number.isNaN(enteredNumber) ||
+      enteredNumber <= 0 ||
+      enteredNumber > 99
+    ) {
       Alert.alert("Invalid Number", "Please enter number between 1 to 99", [
-        { text: "OK", style: "destructive", onPress: (reset) }
+        { text: "OK", style: "destructive", onPress: reset }
       ]);
       return;
     }
     setConfirmed(true);
     setSelectedNumber(enteredValue);
+    Keyboard.dismiss();
   };
   let confirmedMsg;
   if (confirmed) {
-    confirmedMsg = <Text>Choosen Number: {selectedNumber}</Text>;
+    confirmedMsg = (
+      <Card style={styles.summaryContainer}>
+        <Text>Your Selected Number</Text>
+        <NumberContainer>{selectedNumber}</NumberContainer>
+        <Button title="START GAME" color={$primary}/>
+      </Card>
+    );
   }
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
@@ -58,14 +70,14 @@ const StartGameScreen = () => {
           />
           <View style={styles.buttonContainer}>
             <View style={styles.button}>
-              <Button title="Confirm" color={$secondary} onPress={confirm} />
+              <Button title="Reset" color={$secondary} onPress={reset} />
             </View>
             <View style={styles.button}>
-              <Button title="Reset" color={$primary} onPress={reset} />
+              <Button title="Confirm" color={$primary} onPress={confirm} />
             </View>
           </View>
-          {confirmedMsg}
         </Card>
+        {confirmedMsg}
       </View>
     </TouchableWithoutFeedback>
   );
@@ -97,6 +109,11 @@ const styles = StyleSheet.create({
   input: {
     width: 60,
     textAlign: "center"
+  },
+  summaryContainer: {
+      marginTop: 20,
+      width: "80%",
+      alignItems: "center"
   }
 });
 export default StartGameScreen;
