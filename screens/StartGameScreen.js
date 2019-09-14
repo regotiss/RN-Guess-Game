@@ -6,11 +6,30 @@ import Input from "../components/Input";
 
 const StartGameScreen = () => {
   const [enteredValue, setEnteredValue] = useState("");
+  const [confirmed, setConfirmed] = useState(false);
+  const [selectedNumber, setSelectedNumber] = useState();
   const onInputChange = inputText => {
     const updatedText = inputText.replace(/[^0-9]/g, "");
     setEnteredValue(updatedText);
   };
 
+  const reset = () => {
+    setEnteredValue('');
+    setConfirmed(false);
+  }
+
+  const confirm = () => {
+    const enteredNumber = Number.parseInt(enteredNumber);
+    if(enteredNumber == NaN || enteredNumber <= 0 || enteredNumber > 99) {
+        return;
+    }
+    setConfirmed(true);
+    setSelectedNumber(enteredValue);
+  };
+  let confirmedMsg;
+  if(confirmed) {
+      confirmedMsg = <Text>Choosen Number: {selectedNumber}</Text>
+  }
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
       <View style={styles.screen}>
@@ -28,12 +47,13 @@ const StartGameScreen = () => {
           />
           <View style={styles.buttonContainer}>
             <View style={styles.button}>
-              <Button title="Confirm" color={$secondary} />
+              <Button title="Confirm" color={$secondary} onPress={confirm}/>
             </View>
             <View style={styles.button}>
-              <Button title="Reset" color={$primary} />
+              <Button title="Reset" color={$primary} onPress={reset}/>
             </View>
           </View>
+          {confirmedMsg}
         </Card>
       </View>
     </TouchableWithoutFeedback>
