@@ -1,10 +1,17 @@
-import React from "react";
+import React, {useState} from "react";
 import { View, StyleSheet, Text, TextInput, Button } from "react-native";
 import Card from "../components/Card";
 import { $primary, $secondary } from "../constants/colors";
 import Input from "../components/Input";
 
 const StartGameScreen = () => {
+  const [enteredValue, setEnteredValue] = useState(''); 
+  const onInputChange = (inputText) => {
+    const updatedText = inputText.replace(/[^0-9]/g, "");
+    console.log(updatedText);
+    setEnteredValue(updatedText)
+  };
+
   return (
     <View style={styles.screen}>
       <Text style={styles.title}>Start Guess Game</Text>
@@ -16,6 +23,8 @@ const StartGameScreen = () => {
           autoCapitalize="none"
           keyboardType="number-pad"
           maxLength={2}
+          onChangeText={onInputChange}
+          value={enteredValue}
         />
         <View style={styles.buttonContainer}>
           <View style={styles.button}>
