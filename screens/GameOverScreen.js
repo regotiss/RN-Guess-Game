@@ -17,11 +17,9 @@ const GameOverScreen = props => {
         guess your number
         <Label style={styles.resultValue}> {userChoice}</Label>
       </TextHeader>
-      <MainButton
-        title="RESET GAME"
-        onPress={resetGame}
-        style={{ width: 150 }}
-      />
+      <MainButton onPress={resetGame} style={{ width: 150 }}>
+        RESET GAME
+      </MainButton>
     </View>
   );
 };

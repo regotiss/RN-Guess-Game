@@ -2,10 +2,10 @@ import React, { useState, useRef, useEffect } from "react";
 import { View, StyleSheet, Alert } from "react-native";
 import NumberContainer from "../components/NumberContainer";
 import Card from "../components/Card";
-import Label from "../components/Label";
 import MainButton from "../components/MainButton";
 import { $secondary } from "../constants/colors";
 import TextHeader from "../components/TextHeader";
+import { Ionicons } from "@expo/vector-icons";
 
 const generateNumber = (min, max, exclude) => {
   min = Math.ceil(min);
@@ -63,8 +63,12 @@ const GameStartedScreen = props => {
         {currentGuess}
       </NumberContainer>
       <Card style={styles.buttonContainer}>
-        <MainButton title="LOWER" onPress={() => nextGuess("lower")} />
-        <MainButton title="GREATER" onPress={() => nextGuess("greater")} />
+        <MainButton onPress={() => nextGuess("lower")}>
+          <Ionicons name="md-remove" size={22} color="white" />
+        </MainButton>
+        <MainButton onPress={() => nextGuess("greater")}>
+          <Ionicons name="md-add" size={22} color="white" />
+        </MainButton>
       </Card>
     </View>
   );

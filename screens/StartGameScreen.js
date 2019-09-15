@@ -52,10 +52,11 @@ const StartGameScreen = props => {
         <Label>Your Selected Number</Label>
         <NumberContainer>{selectedNumber}</NumberContainer>
         <MainButton
-          title="START GAME"
           style={{ width: 150 }}
           onPress={() => props.startGame(selectedNumber)}
-        />
+        >
+          START GAME
+        </MainButton>
       </Card>
     );
   }
@@ -75,12 +76,10 @@ const StartGameScreen = props => {
             value={enteredValue}
           />
           <View style={styles.buttonContainer}>
-            <MainButton
-              title="Reset"
-              onPress={reset}
-              style={{ backgroundColor: $secondary }}
-            />
-            <MainButton title="Confirm" onPress={confirm} />
+            <MainButton onPress={reset} style={{ backgroundColor: $secondary }}>
+              Reset
+            </MainButton>
+            <MainButton onPress={confirm}>Confirm</MainButton>
           </View>
         </Card>
         {confirmedMsg}
