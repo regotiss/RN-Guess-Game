@@ -1,8 +1,11 @@
 import React, { useState, useRef, useEffect } from "react";
-import { View, StyleSheet, Text, Button, Alert } from "react-native";
+import { View, StyleSheet, Alert } from "react-native";
 import NumberContainer from "../components/NumberContainer";
 import Card from "../components/Card";
 import Label from "../components/Label";
+import MainButton from "../components/MainButton";
+import { $secondary } from "../constants/colors";
+import TextHeader from "../components/TextHeader";
 
 const generateNumber = (min, max, exclude) => {
   min = Math.ceil(min);
@@ -26,7 +29,7 @@ const GameStartedScreen = props => {
   const nextGuess = direction => {
     if (
       (direction === "lower" && currentGuess < userChoice) ||
-      (direction === "upper" && currentGuess > userChoice)
+      (direction === "greater" && currentGuess > userChoice)
     ) {
       Alert.alert("Don't lie!!", "You know that this is wrong", [
         { text: "SORRY", style: "cancel" }
@@ -55,11 +58,13 @@ const GameStartedScreen = props => {
 
   return (
     <View style={styles.screen}>
-      <Label>Computer's Guess</Label>
-      <NumberContainer>{currentGuess}</NumberContainer>
+      <TextHeader>Robot's Guess</TextHeader>
+      <NumberContainer style={{ backgroundColor: $secondary }}>
+        {currentGuess}
+      </NumberContainer>
       <Card style={styles.buttonContainer}>
-        <Button title="LOWER" onPress={() => nextGuess("lower")} />
-        <Button title="UPPER" onPress={() => nextGuess("upper")} />
+        <MainButton title="LOWER" onPress={() => nextGuess("lower")} />
+        <MainButton title="GREATER" onPress={() => nextGuess("greater")} />
       </Card>
     </View>
   );

@@ -2,7 +2,8 @@ import React from "react";
 import { Text, StyleSheet } from "react-native";
 
 const TextHeader = props => {
-  return <Text style={styles.title}>{props.children}</Text>;
+  const { children, style } = props;
+  return <Text style={{ ...styles.title, ...style }}>{children}</Text>;
 };
 
 const styles = StyleSheet.create({

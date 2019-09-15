@@ -2,8 +2,6 @@ import React, { useState } from "react";
 import {
   View,
   StyleSheet,
-  Text,
-  Button,
   Keyboard,
   TouchableWithoutFeedback,
   Alert
@@ -14,6 +12,7 @@ import Input from "../components/Input";
 import NumberContainer from "../components/NumberContainer";
 import TextHeader from "../components/TextHeader";
 import Label from "../components/Label";
+import MainButton from "../components/MainButton";
 
 const StartGameScreen = props => {
   const [enteredValue, setEnteredValue] = useState("");
@@ -50,11 +49,11 @@ const StartGameScreen = props => {
   if (confirmed) {
     confirmedMsg = (
       <Card style={styles.summaryContainer}>
-        <Text>Your Selected Number</Text>
+        <Label>Your Selected Number</Label>
         <NumberContainer>{selectedNumber}</NumberContainer>
-        <Button
+        <MainButton
           title="START GAME"
-          color={$primary}
+          style={{ width: 150 }}
           onPress={() => props.startGame(selectedNumber)}
         />
       </Card>
@@ -76,12 +75,12 @@ const StartGameScreen = props => {
             value={enteredValue}
           />
           <View style={styles.buttonContainer}>
-            <View style={styles.button}>
-              <Button title="Reset" color={$secondary} onPress={reset} />
-            </View>
-            <View style={styles.button}>
-              <Button title="Confirm" color={$primary} onPress={confirm} />
-            </View>
+            <MainButton
+              title="Reset"
+              onPress={reset}
+              style={{ backgroundColor: $secondary }}
+            />
+            <MainButton title="Confirm" onPress={confirm} />
           </View>
         </Card>
         {confirmedMsg}
@@ -97,7 +96,7 @@ const styles = StyleSheet.create({
     alignItems: "center"
   },
   inputContainer: {
-    width: "80%",
+    width: "90%",
     alignItems: "center"
   },
   buttonContainer: {
@@ -105,9 +104,6 @@ const styles = StyleSheet.create({
     width: "100%",
     justifyContent: "space-between",
     paddingHorizontal: 30
-  },
-  button: {
-    width: 100
   },
   input: {
     width: 60,

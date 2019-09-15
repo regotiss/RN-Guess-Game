@@ -1,28 +1,27 @@
 import React from "react";
-import { View, Image, StyleSheet, Button } from "react-native";
+import { View, Image, StyleSheet } from "react-native";
 import TextHeader from "../components/TextHeader";
 import { $secondary } from "../constants/colors";
 import Label from "../components/Label";
+import MainButton from "../components/MainButton";
 
 const GameOverScreen = props => {
   const { numberOfGuesses, userChoice, resetGame } = props;
   return (
     <View style={styles.screen}>
       <TextHeader>Game Over</TextHeader>
-      <Image
-        source={{
-          uri:
-            "https://www.tripsavvy.com/thmb/5hPWyUzUQr8zFULduUxItRXg7Uo=/960x0/filters:no_upscale():max_bytes(150000):strip_icc()/k2-eight-thousanders-569024383df78cafda7e2022.jpg"
-        }}
-        style={styles.image}
-      />
-      <Label style={styles.resultText}>
+      <Image source={require("../assets/success.png")} style={styles.image} />
+      <TextHeader style={styles.resultText}>
         Robot took
         <Label style={styles.resultValue}> {numberOfGuesses}</Label> rounds to
         guess your number
         <Label style={styles.resultValue}> {userChoice}</Label>
-      </Label>
-      <Button title="RESET GAME" onPress={resetGame} />
+      </TextHeader>
+      <MainButton
+        title="RESET GAME"
+        onPress={resetGame}
+        style={{ width: 150 }}
+      />
     </View>
   );
 };
@@ -41,12 +40,11 @@ const styles = StyleSheet.create({
     borderWidth: 2
   },
   resultText: {
-    marginVertical: 20
+    textAlign: "center"
   },
   resultValue: {
-    fontWeight: "bold",
-    fontSize: 20,
-    color: $secondary
+    color: $secondary,
+    fontSize: 25
   }
 });
 export default GameOverScreen;
