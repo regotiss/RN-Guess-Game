@@ -12,6 +12,8 @@ import Card from "../components/Card";
 import { $primary, $secondary } from "../constants/colors";
 import Input from "../components/Input";
 import NumberContainer from "../components/NumberContainer";
+import TextHeader from "../components/TextHeader";
+import Label from "../components/Label";
 
 const StartGameScreen = props => {
   const [enteredValue, setEnteredValue] = useState("");
@@ -61,9 +63,9 @@ const StartGameScreen = props => {
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
       <View style={styles.screen}>
-        <Text style={styles.title}>Start Guess Game</Text>
+        <TextHeader>Start Guess Game</TextHeader>
         <Card style={styles.inputContainer}>
-          <Text>Enter your number</Text>
+          <Label>Enter your number</Label>
           <Input
             style={styles.input}
             blurOnSubmit
@@ -93,10 +95,6 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 10,
     alignItems: "center"
-  },
-  title: {
-    fontSize: 20,
-    paddingVertical: 20
   },
   inputContainer: {
     width: "80%",

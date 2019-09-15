@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import { View, StyleSheet, Text, Button, Alert } from "react-native";
 import NumberContainer from "../components/NumberContainer";
 import Card from "../components/Card";
+import Label from "../components/Label";
 
 const generateNumber = (min, max, exclude) => {
   min = Math.ceil(min);
@@ -47,9 +48,6 @@ const GameStartedScreen = props => {
   };
 
   useEffect(() => {
-    console.log("render--");
-    console.log(userChoice, currentGuess, userChoice === currentGuess);
-
     if (userChoice === currentGuess) {
       endGame(numberOfGuesses);
     }
@@ -57,7 +55,7 @@ const GameStartedScreen = props => {
 
   return (
     <View style={styles.screen}>
-      <Text>Computer's Guess</Text>
+      <Label>Computer's Guess</Label>
       <NumberContainer>{currentGuess}</NumberContainer>
       <Card style={styles.buttonContainer}>
         <Button title="LOWER" onPress={() => nextGuess("lower")} />

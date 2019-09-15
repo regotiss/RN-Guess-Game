@@ -1,14 +1,16 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 import NumberContainer from "../components/NumberContainer";
+import Label from "../components/Label";
+import TextHeader from "../components/TextHeader";
 
 const GameOverScreen = (props) => {
   const {numberOfGuesses, userChoice} = props;
   return (
     <View style={styles.screen}>
-      <Text>Game Over</Text>
-      <Text>Number of Guesses: {numberOfGuesses}</Text>
-      <Text>Number Choosen</Text>
+      <TextHeader>Game Over</TextHeader>
+      <Label>Number of Guesses: {numberOfGuesses}</Label>
+      <Label>Number Choosen</Label>
       <NumberContainer>{userChoice}</NumberContainer>
     </View>
   );
