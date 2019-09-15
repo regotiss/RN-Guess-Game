@@ -29,9 +29,13 @@ export default function App() {
       />
     );
   }
+  const resetGame = () => {
+    setUserChoice(undefined);
+    setNumberOfGuesses(0);
+  };
+
   const startGame = selectedNumber => {
     setUserChoice(selectedNumber);
-    setNumberOfGuesses(0);
   };
 
   const endGame = numberOfGuesses => {
@@ -40,9 +44,7 @@ export default function App() {
   };
 
   let component = <StartGameScreen startGame={startGame} />;
-  component = (
-    <GameOverScreen userChoice={1} numberOfGuesses={1} />
-  );
+  
   if (userChoice) {
     component = <GameStartedScreen userChoice={userChoice} endGame={endGame} />;
   }
@@ -51,6 +53,7 @@ export default function App() {
       <GameOverScreen
         userChoice={userChoice}
         numberOfGuesses={numberOfGuesses}
+        resetGame={resetGame}
       />
     );
   }
