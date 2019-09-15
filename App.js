@@ -40,6 +40,9 @@ export default function App() {
   };
 
   let component = <StartGameScreen startGame={startGame} />;
+  component = (
+    <GameOverScreen userChoice={1} numberOfGuesses={1} />
+  );
   if (userChoice) {
     component = <GameStartedScreen userChoice={userChoice} endGame={endGame} />;
   }
@@ -61,6 +64,6 @@ export default function App() {
 
 const styles = StyleSheet.create({
   screen: {
-    flex: 1,
+    flex: 1
   }
 });
