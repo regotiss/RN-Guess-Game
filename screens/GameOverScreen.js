@@ -5,12 +5,18 @@ import Label from "../components/Label";
 import TextHeader from "../components/TextHeader";
 import { $primary } from "../constants/colors";
 
-const GameOverScreen = (props) => {
-  const {numberOfGuesses, userChoice} = props;
+const GameOverScreen = props => {
+  const { numberOfGuesses, userChoice } = props;
   return (
     <View style={styles.screen}>
       <TextHeader>Game Over</TextHeader>
-      <Image source={require("../assets/success.png")} style={styles.image}/>
+      <Image
+        source={{
+          uri:
+            "https://www.tripsavvy.com/thmb/5hPWyUzUQr8zFULduUxItRXg7Uo=/960x0/filters:no_upscale():max_bytes(150000):strip_icc()/k2-eight-thousanders-569024383df78cafda7e2022.jpg"
+        }}
+        style={styles.image}
+      />
       <Label>Number of Guesses: {numberOfGuesses}</Label>
       <Label>Number Choosen</Label>
       <NumberContainer>{userChoice}</NumberContainer>
