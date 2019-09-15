@@ -24,7 +24,7 @@ export default function App() {
     component = <GameStartedScreen userChoice={userChoice} endGame={endGame} />;
   }
   if(numberOfGuesses) {
-    component = <GameOverScreen />
+    component = <GameOverScreen userChoice={userChoice} numberOfGuesses={numberOfGuesses}/>
   } 
   return (
     <View style={styles.screen}>
